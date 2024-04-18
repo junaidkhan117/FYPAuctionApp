@@ -1,0 +1,66 @@
+.page-wrapper {
+    padding-top: 60px;
+    padding-left: calc(83px + 1.5rem) !important;
+}
+.Page-Heading {
+    font-size: calc(1rem - 2px) !important;
+}
+.card-Shadow {
+    box-shadow: 0 4px 13px 2px hsla(133, 22%, 75%, 0.13);
+}
+.employee-displaying {
+    box-shadow: 1px -11px 14px -8px rgba(114, 132, 154, 0.05);
+}
+.input .search-box {
+    background-color: #fbfefb;
+    border: solid 0.3px #eceeec;
+    border-radius: 5px;
+    border-bottom-right-radius: 0px;
+    border-top-right-radius: 0%;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    &:focus-visible{
+        border-color: var(--bs-primary) !important;
+    }
+  
+}
+.input .btn{
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+}
+.SearchIcon {
+    height: 17px;
+    width: 17px;
+    fill: var(--bs-white);
+}
+.filterIcon{
+    height: 17px;
+    width: 17px;
+    fill: var(--bs-primary);
+    &:hover{
+    fill: var(--bs-white);
+    }
+}
+// .svg-light-btn {
+//     fill: var(--bs-primary) !important;
+//     margin-bottom: 4px;
+//     margin-right: 3px;
+//     &:active, &:focus-visible, &:hover{
+//         fill:#fff !important;
+//     }
+   
+// }
+.pagination-nav nav .page-link:hover {
+    background-color: var(--bs-primary) !important;
+    color: var(--bs-white) !important;
+}
+.pagination-nav nav .active a {
+    background-color: var(--bs-primary) !important;
+    color: var(--bs-white) !important;
+}
+.pagination-nav nav .page-link {
+    color: #606478 !important;
+    border: none !important;
+    border-radius: 5px !important;
+    background-color: #f9f9f9;
+}

@@ -1,0 +1,90 @@
+.background{
+    background-image: linear-gradient(181deg, rgba(244, 249, 249, 0.24) 98%, #f4f9f9 1%);
+  }
+  .details-list{
+      a{
+        svg{
+        fill: var(--bs-dark);
+        stroke: var(--bs-dark);
+        }
+        background-color: var(--bs-white);
+          &:hover{
+            color: var(--bs-primary);
+            box-shadow: 0 12px 15px 0 rgba(121, 119, 139, 0.08);
+            svg{
+              fill: var(--bs-primary);
+              stroke: var(--bs-primary);
+            }
+            }
+      }
+      a.active{
+        color: var(--bs-primary);
+        box-shadow: 0 12px 15px 0 rgba(121, 119, 139, 0.08);
+        svg{
+          fill: var(--bs-primary);
+          stroke: var(--bs-primary);
+        }
+      }
+  }
+  .scrollspy{
+    height: 400px; 
+    overflow-y: scroll;
+    button{
+        background-color: var(--bs-pagination-bg-c);
+        &:hover
+        {
+        background-color: var(--bs-pagination-bg-c);
+        }
+    }
+    .scroll-form{
+        box-shadow: 0 12px 15px 0 rgba(121, 119, 139, 0.08);
+        background-color: #fff;
+    }
+  }
+  .form-control
+  {
+  background-color: var(--bs-pagination-bg-c);
+  border: none;
+  &
+  option
+  {
+    color: $text-gray;
+  }
+  }
+  .btn-default{
+    background-color: var(--bs-pagination-bg-c);
+    &:hover{
+      background-color: var(--bs-pagination-bg-c);
+    }
+  }
+  .upload-property-image{
+    position: relative;
+    .uploaded-image{
+      height: 70px;
+      width: 70px;
+      object-fit: cover;
+      border-radius: 5px;
+    }
+  }
+  .del-icon{   
+    position: absolute;   
+    transition: 0.5s ease;   
+    height: 20px;   
+    width: 20px;   
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--bs-white);
+    box-shadow: 0px 0px 15px 10px rgba(155, 157, 197, 0.05);
+    top: -10px;   
+    right: -10px;      
+  opacity: 1;  
+  cursor: pointer;
+  }
+  @media screen and (max-width:991.5px) {
+    .scrollspy{
+      height: 100%; 
+      overflow-y:auto;
+    }
+  }

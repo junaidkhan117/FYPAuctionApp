@@ -1,0 +1,63 @@
+.dark-navbar{ 
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    background-color: var(--bs-nav-bg);
+    --bs-navbar-color: var(--bs-nav-link-color);
+    --bs-navbar-hover-color: var(--bs-white); 
+    --bs-navbar-active-color: var(--bs-white);
+    --bs-navbar-brand-color: var(--bs-white);
+    --bs-navbar-brand-hover-color: var(--bs-white);
+    .nav-links a{
+        position: relative;
+    }
+    .bottom-border { 
+        border-bottom: 3px solid var(--bs-white); 
+        position: absolute;
+        bottom: -19px; 
+        display: none;
+        left: 0;
+        right: 0;
+        border-radius: 2px;
+    }
+    .nav-links a {
+        border-bottom: 3px solid transparent; 
+    } 
+    .active .bottom-border {
+        display: block;
+    } 
+}
+.dark-navbar.scrolled{
+    background-color: var(--bs-white);
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    .nav-link{
+        color: var(--bs-gray);
+        &:hover{
+            color: var(--bs-primary);
+        }
+    }
+    .nav-link.active{
+         
+            color: var(--bs-primary);
+            .bottom-border { 
+                border-color: var(--bs-primary);
+        }
+    }
+    .bottom-border { 
+        border-bottom: 3px solid var(--bs-gray); 
+    }
+}
+ @media screen and (max-width: 991.5px) {
+    .brandImg{
+        width: 200px;
+    }
+    .bottom-border {  
+        bottom: -13px !important;  
+    }
+ }
+ @media screen and (max-width: 767.5px) { 
+    .bottom-border {  
+        bottom: -4px !important;  
+        width: 40px;
+    }
+ }

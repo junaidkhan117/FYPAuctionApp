@@ -1,0 +1,43 @@
+.category-Page-heading {
+  background-image: url("../images/background-image/category-listing-bg.png");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  padding-top: 140px;
+  padding-bottom: 100px;
+}
+.category-Page-heading p {
+  font-size: 26px;
+  line-height: 1.92;
+  letter-spacing: 0.86px;
+  color: #fff;
+}
+.category-Page-heading h1 {
+  font-size: 3rem;
+  line-height: 1.44;
+  letter-spacing: 1.58px;
+}
+
+.form-control,
+.form-select {
+  background-color: var(--bs-pagination-bg-c);
+  border: 1px solid transparent;
+  border-radius: 0.625rem;
+}
+
+.form-select:focus,
+.form-control:focus {
+  border-color: none;
+  box-shadow: none;
+}
+
+.Search-Icon {
+  position: absolute;
+  right: 0;
+}
+
+.red-dot {
+  width: 10px;
+  height: 10px;
+  background-color: red;
+  border-radius: 50%;
+}/*# sourceMappingURL=category.css.map */

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="tick"  viewBox="0 0 18 18">
+    <g data-name="Group 37832" transform="translate(2 2)">
+        <rect data-name="Rectangle 426" width="18" height="18" rx="9" transform="translate(-2 -2)" style="fill:#fef2f2"/>
+        <g data-name="Group 7568">
+            <path data-name="Path 5656" d="M223.79 395.708c.092-.1.166-.169.245-.248q2.425-2.435 4.857-4.862a2.068 2.068 0 0 1 .251-.231.562.562 0 0 1 .8.761 1.651 1.651 0 0 1-.225.256q-2.682 2.684-5.365 5.365c-.452.451-.689.45-1.144 0-.668-.667-1.337-1.331-2-2a.985.985 0 0 1-.253-.38.51.51 0 0 1 .248-.614.541.541 0 0 1 .709.1q.808.8 1.605 1.6c.082.075.227.209.272.253z" transform="translate(-218.374 -386.673)" style="fill:#f30a11"/>
+        </g>
+    </g>
+</svg>
