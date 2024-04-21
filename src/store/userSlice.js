@@ -11,7 +11,7 @@ const userSlice = createSlice({
     setUser: (state, action) => action.payload,
     userLoggedOut: (state, action) => initialState,
   },
-  extraReducers: {},
+  // extraReducers: {},
 
 });
 

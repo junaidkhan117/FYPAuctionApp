@@ -15,7 +15,7 @@ const loginSlice = createSlice({
       return initialState;
     },
   },
-  extraReducers: {},
+  // extraReducers: {},
 });
 
 export const { setLoginData, logout } = loginSlice.actions;

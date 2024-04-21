@@ -17,7 +17,7 @@ export const fetchWrapper = (arg1, url, body, additionalOptions) => {
       Accept: "application/json",
       "Content-Type": "application/json",
       // Cache: "no-cache",
-      // Authorization: `Bearer ${getFromLocalStorage("authToken")}`,
+      // Authorization: `${getFromLocalStorage("authToken")}`,
     },
     body: body && JSON.stringify(body), // body can be undefined, that's ok
     ...additionalOptions,

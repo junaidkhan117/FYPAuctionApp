@@ -1,11 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import logoLight from "../assets/images/logo/Logo-light.png";
 import logoDark from "../assets/images/logo/Logo-dark.png";
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { getFromLocalStorage } from "../utils/localStorage";
+import { deleteFromLocalStorage } from "../utils/localStorage";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../Authentication/Login/loginSlice";
+import { userLoggedOut } from "../store/userSlice";
+// import { useNavigate } from "react-router";
 const NavBar = () => {
   const { pathname } = useLocation();
     const [scrollY, setScrollY] = useState(window.scrollY);
     const [innerWidth, setInnerWidth] = useState(window.innerWidth);
+    const authToken = getFromLocalStorage("authToken");
     useEffect(() => {
       function handleScroll() {
         setScrollY(window.scrollY);
@@ -23,6 +30,14 @@ const NavBar = () => {
         window.removeEventListener("resize", handleResize);
       };
     }, []);
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const handleLogout = () => {
+      dispatch(logout());
+      dispatch(userLoggedOut());
+      deleteFromLocalStorage("authToken");
+      navigate("/login");
+    };
   return (
     <>
         <nav
@@ -81,6 +96,16 @@ const NavBar = () => {
                   <span className="fw-semibold">Sell</span> your product
                 </Link>
               </li>
+              {authToken &&
+              <li className="nav-item pe-0 pe-md-4">
+                <button 
+                  className="nav-link btn btn-gradiant text-white"
+                  onClick={handleLogout}
+                >
+                  Logout
+                </button>
+              </li>
+              }
             </ul>
           </div>
         </div>

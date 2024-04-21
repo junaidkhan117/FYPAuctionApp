@@ -90,28 +90,28 @@ const ProductDetails = () => {
         <>
 
             <div className="container-fluid background p-md-5 p-3 mt-5">
-                <div class="row align-items-center justify-content-between my-md-5 mb-3">
-                    <div class="col-lg-6 text-center text-lg-start">
-                        <h4 class="mb-3">Reach Millions of Buyers on our Platforms</h4>
+                <div className="row align-items-center justify-content-between my-md-5 mb-3">
+                    <div className="col-lg-6 text-center text-lg-start">
+                        <h4 className="mb-3">Reach Millions of Buyers on our Platforms</h4>
                     </div>
-                    <div class="col-lg-6 text-center d-none d-md-block">
+                    <div className="col-lg-6 text-center d-none d-md-block">
                         <img src={AuctionItems} alt="" />
                     </div>
                 </div>
                 <div className="row">
                     <div className="col-4 d-none d-lg-block">
-                        <div id="simple-list-example" class="d-flex flex-column gap-3 details-list text-center">
+                        <div id="simple-list-example" className="d-flex flex-column gap-3 details-list text-center">
                             <a className={`p-3 rounded text-start ss-item-demo-2 ${activeSection === "section-1" ? "active" : ""}`} onClick={(e) => onPress(e)} href={"#section-1"} data-to-scrollspy-id="section-1" >
 
-                                <LocationIcon width="15" height="15" class="mb-1 me-2" />
+                                <LocationIcon width="15" height="15" className="mb-1 me-2" />
                                 Product Description
                             </a>
                             <a className={`p-3 rounded text-start ss-item-demo-2 ${activeSection === "section-2" ? "active" : ""}`} onClick={(e) => onPress(e)} href={"#section-2"} data-to-scrollspy-id="section-2" >
-                                <TagIcon width="15" height="15" class="mb-1 me-2" />
+                                <TagIcon width="15" height="15" className="mb-1 me-2" />
                                 Product Images
                             </a>
                             <a className={`p-3 rounded text-start ss-item-demo-2 ${activeSection === "section-3" ? "active" : ""}`} onClick={(e) => onPress(e)} href={"#section-3"} data-to-scrollspy-id="section-3" >
-                                <DetailsIcon width="15" height="15" class="mb-1 me-2" />
+                                <DetailsIcon width="15" height="15" className="mb-1 me-2" />
                                 Biding Details
                             </a>
                         </div>
@@ -124,37 +124,37 @@ const ProductDetails = () => {
                         >
                             <ScrollSpy
                                 parentScrollContainerRef={parentScrollContainerRef}
-                                activeClass="active"
+                                activeclassName="active"
                                 offsetBottom={100}
                                 scrollThrottle={80}
                                 useBoxMethod
                             >
-                                <div id="section-1" class="bg-white rounded-2 p-3 mb-5 scroll-form">
+                                <div id="section-1" className="bg-white rounded-2 p-3 mb-5 scroll-form">
                                     <h5>Product Description</h5>
-                                    <div class="row">
-                                        <div class="">
-                                            <label for="" class="form-label mb-3 small">Product Categories</label>
-                                            <select class="form-select form-control mb-3" name="" id="validationServer05" aria-describedby="validationServer05Feedback">
+                                    <div className="row">
+                                        <div className="">
+                                            <label  className="form-label mb-3 small">Product Categories</label>
+                                            <select className="form-select form-control mb-3" name="" id="validationServer05" aria-describedby="validationServer05Feedback">
                                                 <option selected="">Please Select</option>
                                                 <option value="">New Delhi</option>
                                                 <option value="">Istanbul</option>
                                                 <option value="">Jakarta</option>
                                             </select>
                                         </div>
-                                        <div class="">
-                                            <label for="" class="form-label mb-3 small">Product Title</label>
-                                            <input type="text" class="form-control mb-3" placeholder="Please Enter" />
+                                        <div className="">
+                                            <label  className="form-label mb-3 small">Product Title</label>
+                                            <input type="text" className="form-control mb-3" placeholder="Please Enter" />
                                         </div>
-                                        <div class="" bis_skin_checked="1">
-                                            <label for="" class="form-label mb-3 small">Description</label>
-                                            <div class="form-floating mb-3" bis_skin_checked="1">
-                                                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style={{ height: "100px" }}></textarea>
-                                                <label for="floatingTextarea2">Please Enter</label>
+                                        <div className="" bis_skin_checked="1">
+                                            <label  className="form-label mb-3 small">Description</label>
+                                            <div className="form-floating mb-3" bis_skin_checked="1">
+                                                <textarea className="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style={{ height: "100px" }}></textarea>
+                                                <label htmlFor="floatingTextarea2">Please Enter</label>
                                             </div>
                                         </div>
-                                        <div class="">
-                                            <label for="" class="form-label mb-3 small">Product Condition</label>
-                                            <select class="form-select form-control mb-3" name="" id="validationServer05" aria-describedby="validationServer05Feedback">
+                                        <div className="">
+                                            <label  className="form-label mb-3 small">Product Condition</label>
+                                            <select className="form-select form-control mb-3" name="" id="validationServer05" aria-describedby="validationServer05Feedback">
                                                 <option selected="">Please Select</option>
                                                 <option value="">New Delhi</option>
                                                 <option value="">Istanbul</option>
@@ -164,18 +164,18 @@ const ProductDetails = () => {
                                     </div>
                                 </div>
 
-                                <div id="section-2" class="bg-white rounded-2 p-3 mb-5 scroll-form">
+                                <div id="section-2" className="bg-white rounded-2 p-3 mb-5 scroll-form">
                                     <h5>Product Images</h5>
-                                    <h6 class="small">Upload Images</h6>
-                                    <p class="small text-gray">Upload up to 20 Images. JPEG, PNG Images Only accepted, Image size
+                                    <h6 className="small">Upload Images</h6>
+                                    <p className="small text-gray">Upload up to 20 Images. JPEG, PNG Images Only accepted, Image size
                                         must not exceed 20 MB</p>
-                                    <div class=" d-flex gap-2">
-                                        <div class="">
-                                            <label class="btn btn-default btn-file border-0 p-3 position-relative">
-                                                <div class="uploadFile d-flex justify-content-center align-items-center ">
+                                    <div className=" d-flex gap-2">
+                                        <div className="">
+                                            <label className="btn btn-default btn-file border-0 p-3 position-relative">
+                                                <div className="uploadFile d-flex justify-content-center align-items-center ">
                                                     <img src={UploadIcon} height="40" width="40" id="image-preview" alt="" />
                                                 </div>
-                                                <input type="file" class="d-none" id="file-input" onChange={handleFileChange} multiple required="" />
+                                                <input type="file" className="d-none" id="file-input" onChange={handleFileChange} multiple required="" />
                                             </label>
                                         </div>
                                         <div className="image-container d-flex gap-3 flex-wrap position-relative">
@@ -195,20 +195,20 @@ const ProductDetails = () => {
 
                                 </div>
 
-                                <div id="section-3" class="bg-white rounded-2 p-3  scroll-form pb-custom" >
+                                <div id="section-3" className="bg-white rounded-2 p-3  scroll-form pb-custom" >
                                     <h5 className="my-3">Biding Details</h5>
-                                    <div class="row align-items-end ">
-                                        <div class="">
-                                            <label for="" class="form-label mb-3 small">Starting Bid Price</label>
-                                            <input type="text" class="form-control mb-3" placeholder="Please Enter" />
+                                    <div className="row align-items-end ">
+                                        <div className="">
+                                            <label  className="form-label mb-3 small">Starting Bid Price</label>
+                                            <input type="text" className="form-control mb-3" placeholder="Please Enter" />
                                         </div>
-                                        <div class="">
-                                            <label for="" class="form-label mb-3 small">Reserve Price (Optional)</label>
-                                            <input type="text" class="form-control mb-3" placeholder="Please Enter" />
+                                        <div className="">
+                                            <label  className="form-label mb-3 small">Reserve Price (Optional)</label>
+                                            <input type="text" className="form-control mb-3" placeholder="Please Enter" />
                                         </div>
-                                        <div class="">
-                                            <label for="" class="form-label mb-3 small">Auction Duration</label>
-                                            <select class="form-select form-control mb-3" name="" id="validationServer05" aria-describedby="validationServer05Feedback">
+                                        <div className="">
+                                            <label  className="form-label mb-3 small">Auction Duration</label>
+                                            <select className="form-select form-control mb-3" name="" id="validationServer05" aria-describedby="validationServer05Feedback">
                                                 <option selected="">Please Select</option>
                                                 <option value="">New Delhi</option>
                                                 <option value="">Istanbul</option>

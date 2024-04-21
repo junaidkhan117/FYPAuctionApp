@@ -6,32 +6,41 @@ import { ReactComponent as WatchSvg } from "../assets/images/new-icons/watch-cat
 import { ReactComponent as DigiAssessoriesSvg } from "../assets/images/new-icons/DigitalAssessories-category.svg";
 import carImg from "../assets/images/car.png";
 import Carousel from "react-bootstrap/Carousel";
-import { useDashboardStats } from "../hooks/common";
+import { usegetAuctions } from "../hooks/common";
+import { getFromLocalStorage } from "../utils/localStorage";
 const Home = () => {
-  const { data: dashboardStats } = useDashboardStats();
-  console.log(dashboardStats)
+  const [page, setPage] = useState(1);
+  const { data: AuctionsCards } = usegetAuctions(page);
+  console.log(AuctionsCards);
+  // const authToken = getFromLocalStorage("authToken");
   const [index, setIndex] = useState(0);
-  const images = [
-    {
-      carImg,
-    },
-    {
-      carImg,
-    },
-    {
-      carImg,
-    },
-  ];
-  const handleSelect = (selectedIndex, e) => {
-    setIndex(selectedIndex);
+
+  const PageChange = (number) => {
+    setPage(number);
+
+    // Implementation of callApi
   };
-  <>
-    <Carousel activeIndex={index} onSelect={handleSelect}>
-      {images.map((image, idx) => (
-        <Carousel.Item key={idx}></Carousel.Item>
-      ))}
-    </Carousel>
-  </>;
+  // const images = [
+  //   {
+  //     carImg,
+  //   },
+  //   {
+  //     carImg,
+  //   },
+  //   {
+  //     carImg,
+  //   },
+  // ];
+  // const handleSelect = (selectedIndex, e) => {
+  //   setIndex(selectedIndex);
+  // };
+  // <>
+  //   <Carousel activeIndex={index} onSelect={handleSelect}>
+  //     {images.map((image, idx) => (
+  //       <Carousel.Item key={idx}></Carousel.Item>
+  //     ))}
+  //   </Carousel>
+  // </>;
   return (
     <>
       {/* <Navbar /> */}
@@ -97,71 +106,73 @@ const Home = () => {
         </div>
         <div className="container pt-4">
           <div className="row g-4">
-            <div className="col-lg-6">
-              <div
-                className="card mb-3 border-0 overflow-hidden rounded-start-4"
-                style={{ maxWidth: "695px" }}
-              >
-                <div className="row g-0  ">
-                  <div className="col-md-4 ">
-                    <Carousel>
-                      <Carousel.Item className="">
-                        <img
-                          src={carImg}
-                          className="d-block object-fit-contain"
-                          alt="..."
-                        />
-                      </Carousel.Item>
-                      <Carousel.Item>
-                        <img
-                          src={carImg}
-                          className="d-block object-fit-contain"
-                          alt="..."
-                        />
-                      </Carousel.Item>
-                      <Carousel.Item>
-                        <img
-                          src={carImg}
-                          className="d-block object-fit-contain"
-                          alt="..."
-                        />
-                      </Carousel.Item>
-                    </Carousel>
-                  </div>
-                  <div className="col-md-8">
-                    <div className="card-body">
-                      <h6 className="card-title mb-0">Ford shelby White Car</h6>
-                      <div className="card-text my-3">
-                        <div className="d-flex align-items-center justify-content-between p-3 timer rounded-2">
-                          <div className="text-center days">
-                            <h4 className="mb-1">96</h4>
-                            <p className="small mb-0">Days</p>
-                          </div>
-                          <div className="text-center hours">
-                            <h4 className="mb-1">14</h4>
-                            <p className="small mb-0">Hours</p>
-                          </div>
-                          <div className="text-center minutes">
-                            <h4 className="mb-1">44</h4>
-                            <p className="small mb-0">Minutes</p>
-                          </div>
-                          <div className="text-center seconds">
-                            <h4 className="mb-1">12</h4>
-                            <p className="small mb-0">Seconds</p>
+            {AuctionsCards?.results?.map((auctions) => (
+              <div className="col-lg-6">
+                <div
+                  className="card mb-3 border-0 overflow-hidden rounded-start-4"
+                  style={{ maxWidth: "695px" }}
+                >
+                  <div className="row g-0  ">
+                    <div className="col-md-4 ">
+                      {/* <Carousel>
+                        {auctions?.product_images.map((imgs, index)=>(
+                        <Carousel.Item className="">
+                          <img
+                            src={imgs.index}
+                            className="d-block object-fit-contain"
+                            alt="..."
+                          />
+                        </Carousel.Item>
+                       ))}
+                      </Carousel> */}
+                    </div>
+                    <div className="col-md-8">
+                      <div className="card-body">
+                        <h6 className="card-title mb-0">
+                          {auctions.product.name}
+                        </h6>
+                        <div className="card-text my-3">
+                          <div className="d-flex align-items-center justify-content-between p-3 timer rounded-2">
+                            <div className="text-center days">
+                              <h4 className="mb-1">96</h4>
+                              <p className="small mb-0">Days</p>
+                            </div>
+                            <div className="text-center hours">
+                              <h4 className="mb-1">14</h4>
+                              <p className="small mb-0">Hours</p>
+                            </div>
+                            <div className="text-center minutes">
+                              <h4 className="mb-1">44</h4>
+                              <p className="small mb-0">Minutes</p>
+                            </div>
+                            <div className="text-center seconds">
+                              <h4 className="mb-1">12</h4>
+                              <p className="small mb-0">Seconds</p>
+                            </div>
                           </div>
                         </div>
+                        <div className="d-flex align-items-center justify-content-between mb-3">
+                          <p className="mb-0 small">Current Bid</p>
+                          <h6 className="mb-0">
+                            {auctions.product.initial_price}
+                          </h6>
+                        </div>
+                        <button className="btn btn-primary w-100">
+                          Bid Now
+                        </button>
                       </div>
-                      <div className="d-flex align-items-center justify-content-between mb-3">
-                        <p className="mb-0 small">Current Bid</p>
-                        <h6 className="mb-0">9,999,425.00 pKR</h6>
-                      </div>
-                      <button className="btn btn-primary w-100">Bid Now</button>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <CardsPagination />
+            ))}
+            {AuctionsCards?.count > 1 && (
+              <CardsPagination
+                count={AuctionsCards?.count}
+                page={page}
+                onClick={PageChange}
+              />
+            )}
           </div>
         </div>
       </div>
