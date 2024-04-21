@@ -11,6 +11,7 @@ export const signUp = (Data) => {
   return fetchWrapper("POST", `${API_URL_GET}/auth/buyer/`, Data);
 };
 
+
 export const getDashboardProducts = (page) => {
   console.log(page)
   return fetchWrapper("GET", `${API_URL_GET}/products/?p=${page}&page_size=4`);

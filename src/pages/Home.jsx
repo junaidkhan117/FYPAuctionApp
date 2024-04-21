@@ -8,6 +8,7 @@ import carImg from "../assets/images/car.png";
 import Carousel from "react-bootstrap/Carousel";
 import { usegetAuctions } from "../hooks/common";
 import { getFromLocalStorage } from "../utils/localStorage";
+import CountdownTimer from './../components/CountdownTimer';
 const Home = () => {
   const [page, setPage] = useState(1);
   const { data: AuctionsCards } = usegetAuctions(page);
@@ -132,7 +133,7 @@ const Home = () => {
                           {auctions.product.name}
                         </h6>
                         <div className="card-text my-3">
-                          <div className="d-flex align-items-center justify-content-between p-3 timer rounded-2">
+                          {/* <div className="d-flex align-items-center justify-content-between p-3 timer rounded-2">
                             <div className="text-center days">
                               <h4 className="mb-1">96</h4>
                               <p className="small mb-0">Days</p>
@@ -149,12 +150,14 @@ const Home = () => {
                               <h4 className="mb-1">12</h4>
                               <p className="small mb-0">Seconds</p>
                             </div>
-                          </div>
+                          </div> */}
+                          <CountdownTimer endTime={auctions.end_time} />
+                          
                         </div>
                         <div className="d-flex align-items-center justify-content-between mb-3">
                           <p className="mb-0 small">Current Bid</p>
                           <h6 className="mb-0">
-                            {auctions.product.initial_price}
+                            {auctions.product.latest_bid}
                           </h6>
                         </div>
                         <button className="btn btn-primary w-100">
@@ -168,7 +171,8 @@ const Home = () => {
             ))}
             {AuctionsCards?.count > 1 && (
               <CardsPagination
-                count={AuctionsCards?.count}
+                count={Math.ceil(AuctionsCards?.count / 4)}
+                // count={Math.ceil(6 / 4)}
                 page={page}
                 onClick={PageChange}
               />

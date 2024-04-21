@@ -25,7 +25,12 @@ export const useLogin = (onError, handleSuccess) => {
       handleSuccess(data)
         // let { user, ...rest } = data;
         setToLocalStorage("authToken", data.access);
-        // setToLocalStorage("user", JSON.stringify(user));
+        setToLocalStorage("user", JSON.stringify(data));
+        setToLocalStorage("email", data.email);
+        setToLocalStorage("isSeller", data.isSeller);
+        setToLocalStorage("isBuyer", data.isBuyer);
+
+    
         // dispatch(setLoginData({ ...rest, access: data.access }));
         // dispatch(setUser(user));
          // navigate("/");

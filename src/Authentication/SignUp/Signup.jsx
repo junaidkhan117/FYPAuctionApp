@@ -100,7 +100,13 @@ const Signup = () => {
             <input type="password" className="form-control " value={password} onChange={(e)=> setPassword(e.target.value)} placeholder="Please Enter"/>
         </div>
     </div>
-    
+    <div className="col-6">
+        <div className="mb-3">
+            <label  className="form-label regular small">Password</label>
+            <input type="check" className="form-control "/>
+            
+        </div>
+    </div>
         <div className="d-flex justify-content-evenly align-items-center pt-5 mt-3">
             <button className="btn btn-danger px-5 w-75 text-white" type="submit">
                 SignUp
