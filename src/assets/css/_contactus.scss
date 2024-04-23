@@ -1,0 +1,37 @@
+.contactus-bg{
+    background-image: url('../images/background-image/contactusbg.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+.contact-card{
+    border: none !important;
+}
+.phone-select{
+border: none;
+background-color: var(--bs-pagination-bg-c);
+border-top-right-radius: 0px !important;
+border-bottom-right-radius: 0px !important;
+&:focus{
+    box-shadow: none;
+    background-color: #e6eaef;
+}
+}
+.phone-number{
+    border-top-left-radius: 0px !important;
+border-bottom-left-radius: 0px !important;
+}
+
+.Page-heading-contact {
+    background-image: url('../images/contact-bg.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    padding-top: 120px;
+    padding-bottom: 80px;
+}
+.font-family-bold{
+    font-family: inter-bold;
+}
+
+.font-family-extrabold{ 
+    font-family: inter-extrabold;
+}

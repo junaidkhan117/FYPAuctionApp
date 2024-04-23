@@ -49,7 +49,8 @@ const Product = () => {
                         <div className="">
                             <h4 className=" mb-5">Ford shelby White Car</h4>
                             <p className="text-dark">Korem ipsum dolor amet, consectetur adipiscing elit. Maece nas in pulvinar neque. Nulla finibus lobortis pulvinar. Donec a consectetur nulla.</p>
-                            <p>ITEM CONDITION: <span className="text-primary">NEW</span></p>
+                            <p>ITEM CONDITION: <span className="text-primary">NEW</span></p> 
+                            <p>Expected Price: <span className="text-primary">740,000,000.0$</span></p>
                             <div className=" my-3">
                                 <p>TIME LEFT</p>
                                 <div className="d-flex align-items-center justify-content-between p-3 timer rounded-2 bg-light" >

@@ -13,6 +13,7 @@ import Product from "./pages/Product";
 import ProductDetails from "./pages/ProductDetails";
 import ListingInformation from "./pages/ListingInformation";
 import FileUpload from "./pages/FileUpload";
+import Contact from "./pages/Contact";
 const Router = () => {
   const userType = getFromLocalStorage("userType");
   return (
@@ -22,15 +23,18 @@ const Router = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/FileUpload" element={<FileUpload />} />
+
           <Route exact path="/*" element={<AppContainer />}>
             <Route index element={<Home />} />
-              <Route element={<PrivateRoutes />}>
-                <Route path="categoryListing" element={<CategoryListing />} />
-                <Route path="products" element={<Product />} />
-          
-                <Route path="productdetails" element={<ProductDetails />} />
-                <Route path="listinginfo" element={<ListingInformation />} />
-              </Route>
+            <Route element={<PrivateRoutes />}>
+              <Route path="categoryListing" element={<CategoryListing />} />
+              <Route path="products" element={<Product />} />
+
+              <Route path="productdetails" element={<ProductDetails />} />
+              <Route path="listinginfo" element={<ListingInformation />} />
+              <Route path="contactus" element={<Contact />} />
+              <Route path="contact" element={<Contact />} />
+            </Route>
           </Route>
         </Routes>
       </BrowserRouter>

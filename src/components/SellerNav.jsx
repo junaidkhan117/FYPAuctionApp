@@ -47,9 +47,9 @@ const SellerNav = () => {
                     </li>
 
                     <li className="nav-item pe-4">
-                        <a className="nav-link nav-border" >Contact
+                        <Link to="/contactus" class={`nav-link nav-border  ${pathname === '/contactus' && 'active' }`}>Contact
                             <span className="bottom-border"></span>
-                        </a>
+                        </Link>
                     </li>
                     <li className="nav-item pe-0 pe-md-4">
                         <button className="nav-link btn btn-gradiant text-white" onClick={handleLogout}> <span

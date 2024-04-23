@@ -25,10 +25,10 @@ const ProductDetails = () => {
 
 
 
-  const userType = getFromLocalStorage("userType");
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-      useEffect(() => {
+    const userType = getFromLocalStorage("userType");
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    useEffect(() => {
         if (userType == 'buyer') {
             dispatch(logout());
             dispatch(userLoggedOut());
@@ -39,12 +39,12 @@ const ProductDetails = () => {
             deleteFromLocalStorage("userType");
             navigate("/login");
         }
-      }, []);
+    }, []);
 
     //   useEffect(() => {
     //     if (parentScrollContainerRef.current) {
     //       parentScrollContainerRef.current.style.overflowY = "scroll";
-    //     //   parentScrollContainerRef.current.style.height = "50vh";
+    //       parentScrollContainerRef.current.style.height = "50vh";
     //       parentScrollContainerRef.current.style.position = "relative";
     //     }
     //   }, []);
@@ -230,18 +230,22 @@ const ProductDetails = () => {
                                         <div className="">
                                             <label className="form-label mb-3 small">Starting Bid Price</label>
                                             <input type="text" className="form-control mb-3" placeholder="Please Enter" />
-                                        </div>
-                                        <div className="">
-                                            <label className="form-label mb-3 small">Reserve Price (Optional)</label>
-                                            <input type="text" className="form-control mb-3" placeholder="Please Enter" />
+                                            <div className="d-flex justify-content-end mt-3">
+                                            <button className="nav-link btn btn-gradiant text-white p-2">
+                                            Price Recommendation 
+                                            </button>
+                                            </div>
                                         </div>
                                         <div className="">
                                             <label className="form-label mb-3 small">Auction Duration</label>
                                             <select className="form-select form-control mb-3" name="" id="validationServer05" aria-describedby="validationServer05Feedback">
                                                 <option selected="">Please Select</option>
-                                                <option value="">New Delhi</option>
-                                                <option value="">Istanbul</option>
-                                                <option value="">Jakarta</option>
+                                                <option value="">12 hrs</option>
+                                                <option value="">24 hrs</option>
+                                                <option value="">3 days</option>
+                                                <option value="">7 days</option>
+                                                <option value="">15 days</option>
+                                                <option value="">30 days</option>
                                             </select>
                                         </div>
                                     </div>

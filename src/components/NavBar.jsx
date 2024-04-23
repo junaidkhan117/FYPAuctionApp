@@ -105,8 +105,14 @@ const NavBar = () => {
                       <span className="bottom-border"></span>
                     </Link>
                   </li>
+
                 </>
               }
+              <li className="nav-item pe-4">
+                <Link to="/contact" class={`nav-link nav-border  ${pathname === '/contact' && 'active'}`}>Contact
+                  <span className="bottom-border"></span>
+                </Link>
+              </li>
               <li className="nav-item pe-0 pe-md-4">
                 <button className="nav-link btn btn-gradiant text-white"
                   onClick={handlesell}

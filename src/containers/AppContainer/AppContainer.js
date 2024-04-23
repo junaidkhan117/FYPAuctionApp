@@ -8,7 +8,7 @@ const AppContainer = () => {
 
   return (
     <>
-    {pathname === '/productdetails' || pathname === '/listinginfo' ? <SellerNav/> : <NavBar/> }
+    {pathname === '/productdetails' || pathname === '/listinginfo' || pathname === '/contactus' ? <SellerNav/> : <NavBar/> }
     
     <Outlet/>
     </>

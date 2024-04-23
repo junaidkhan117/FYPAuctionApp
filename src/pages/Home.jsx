@@ -44,8 +44,6 @@ const Home = () => {
   // </>;
   return (
     <>
-      {/* <Navbar /> */}
-
       <div className="Page-heading text-center">
         <div className="d-flex justify-content-center">
           <div className="col-12 col-md-7">
