@@ -1,6 +1,8 @@
 import React from "react";
-import { BrowserRouter, Route, Routes,  Outlet,
-  Navigate, } from "react-router-dom";
+import {
+  BrowserRouter, Route, Routes, Outlet,
+  Navigate,
+} from "react-router-dom";
 import { getFromLocalStorage } from "./utils/localStorage";
 import AppContainer from "./containers/AppContainer/AppContainer";
 import Login from "./Authentication/Login/Login";
@@ -12,6 +14,7 @@ import ProductDetails from "./pages/ProductDetails";
 import ListingInformation from "./pages/ListingInformation";
 import FileUpload from "./pages/FileUpload";
 const Router = () => {
+  const userType = getFromLocalStorage("userType");
   return (
     <>
       <BrowserRouter>
@@ -21,14 +24,14 @@ const Router = () => {
           <Route path="/FileUpload" element={<FileUpload />} />
           <Route exact path="/*" element={<AppContainer />}>
             <Route index element={<Home />} />
-          {/* <Route element={<PrivateRoutes />}> */}
-          {/* <Route path="home" element={<Home />} /> */}
-          <Route path="categoryListing" element={<CategoryListing />} />
-          <Route path="products" element={<Product />} />
-          <Route path="productdetails" element={<ProductDetails />} />
-          <Route path="listinginfo" element={<ListingInformation />} />
+              <Route element={<PrivateRoutes />}>
+                <Route path="categoryListing" element={<CategoryListing />} />
+                <Route path="products" element={<Product />} />
+          
+                <Route path="productdetails" element={<ProductDetails />} />
+                <Route path="listinginfo" element={<ListingInformation />} />
+              </Route>
           </Route>
-          {/* </Route> */}
         </Routes>
       </BrowserRouter>
     </>

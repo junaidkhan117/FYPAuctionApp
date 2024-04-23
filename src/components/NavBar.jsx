@@ -10,37 +10,52 @@ import { userLoggedOut } from "../store/userSlice";
 // import { useNavigate } from "react-router";
 const NavBar = () => {
   const { pathname } = useLocation();
-    const [scrollY, setScrollY] = useState(window.scrollY);
-    const [innerWidth, setInnerWidth] = useState(window.innerWidth);
-    const authToken = getFromLocalStorage("authToken");
-    useEffect(() => {
-      function handleScroll() {
-        setScrollY(window.scrollY);
-      }
-  
-      function handleResize() {
-        setInnerWidth(window.innerWidth);
-      }
-  
-      window.addEventListener("scroll", handleScroll);
-      window.addEventListener("resize", handleResize);
-  
-      return () => {
-        window.removeEventListener("scroll", handleScroll);
-        window.removeEventListener("resize", handleResize);
-      };
-    }, []);
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
-    const handleLogout = () => {
-      dispatch(logout());
-      dispatch(userLoggedOut());
-      deleteFromLocalStorage("authToken");
-      navigate("/login");
+  const [scrollY, setScrollY] = useState(window.scrollY);
+  const [innerWidth, setInnerWidth] = useState(window.innerWidth);
+  const authToken = getFromLocalStorage("authToken");
+  const userType = getFromLocalStorage("userType");
+  useEffect(() => {
+    function handleScroll() {
+      setScrollY(window.scrollY);
+    }
+
+    function handleResize() {
+      setInnerWidth(window.innerWidth);
+    }
+
+    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleResize);
     };
+  }, []);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    dispatch(logout());
+    dispatch(userLoggedOut());
+    deleteFromLocalStorage("authToken");
+    deleteFromLocalStorage("email");
+    deleteFromLocalStorage("user");
+    deleteFromLocalStorage("userId");
+    deleteFromLocalStorage("userType");
+    navigate("/login");
+  };
+
+  const handlesell = () => {
+    if (userType == 'seller') {
+      navigate('/productdetails')
+    }
+    else {
+      handleLogout()
+    }
+  }
+
   return (
     <>
-        <nav
+      <nav
         className={`navbar navbar-expand-md dark-navbar fixed-top ${scrollY > 50 || innerWidth < 768 ? "scrolled" : "container-lg"
           }`}
       >
@@ -74,37 +89,41 @@ const NavBar = () => {
                   <span className="bottom-border "></span>
                 </Link>
               </li>
-              <li className="nav-item pe-4">
-                <Link to={"/categoryListing"} className={`nav-link nav-border ${pathname === "/categoryListing" && 'active'}`}>
-                  Category Listing
-                  <span className="bottom-border"></span>
-                </Link>
-              </li>
 
-              <li className="nav-item pe-4">
-                <Link to={"/products"} className={`nav-link nav-border ${pathname === "/products" && 'active'}`}>
-                  Products
-                  <span className="bottom-border"></span>
-                </Link>
-              </li>
+              {userType == 'seller' ? null :
+                <>
+                  <li className="nav-item pe-4">
+                    <Link to={"/categoryListing"} className={`nav-link nav-border ${pathname === "/categoryListing" && 'active'}`}>
+                      Category Listing
+                      <span className="bottom-border"></span>
+                    </Link>
+                  </li>
+
+                  <li className="nav-item pe-4">
+                    <Link to={"/products"} className={`nav-link nav-border ${pathname === "/products" && 'active'}`}>
+                      Products
+                      <span className="bottom-border"></span>
+                    </Link>
+                  </li>
+                </>
+              }
               <li className="nav-item pe-0 pe-md-4">
-                <Link to="/productdetails"
-                  className="nav-link btn btn-gradiant text-white"
-                  // href="Products-Details.html"
+                <button className="nav-link btn btn-gradiant text-white"
+                  onClick={handlesell}
+                // href="Products-Details.html"
                 >
-                  {" "}
                   <span className="fw-semibold">Sell</span> your product
-                </Link>
-              </li>
-              {authToken &&
-              <li className="nav-item pe-0 pe-md-4">
-                <button 
-                  className="nav-link btn btn-gradiant text-white"
-                  onClick={handleLogout}
-                >
-                  Logout
                 </button>
               </li>
+              {authToken &&
+                <li className="nav-item pe-0 pe-md-4">
+                  <button
+                    className="nav-link btn btn-gradiant text-white"
+                    onClick={handleLogout}
+                  >
+                    Logout
+                  </button>
+                </li>
               }
             </ul>
           </div>

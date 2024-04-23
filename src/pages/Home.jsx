@@ -130,34 +130,17 @@ const Home = () => {
                     <div className="col-md-8">
                       <div className="card-body">
                         <h6 className="card-title mb-0">
-                          {auctions.product.name}
+                          {auctions.product_name}
                         </h6>
                         <div className="card-text my-3">
-                          {/* <div className="d-flex align-items-center justify-content-between p-3 timer rounded-2">
-                            <div className="text-center days">
-                              <h4 className="mb-1">96</h4>
-                              <p className="small mb-0">Days</p>
-                            </div>
-                            <div className="text-center hours">
-                              <h4 className="mb-1">14</h4>
-                              <p className="small mb-0">Hours</p>
-                            </div>
-                            <div className="text-center minutes">
-                              <h4 className="mb-1">44</h4>
-                              <p className="small mb-0">Minutes</p>
-                            </div>
-                            <div className="text-center seconds">
-                              <h4 className="mb-1">12</h4>
-                              <p className="small mb-0">Seconds</p>
-                            </div>
-                          </div> */}
+               
                           <CountdownTimer endTime={auctions.end_time} />
                           
                         </div>
                         <div className="d-flex align-items-center justify-content-between mb-3">
                           <p className="mb-0 small">Current Bid</p>
                           <h6 className="mb-0">
-                            {auctions.product.latest_bid}
+                            {auctions.latest_bid || auctions.product_initialPrice}
                           </h6>
                         </div>
                         <button className="btn btn-primary w-100">

@@ -3,12 +3,12 @@ const API_URL_GET = process.env.REACT_APP_API_URL;
 
 
 export const login = (Data) => {
-  return fetchWrapper("POST", `${API_URL_GET}/auth/login/`, Data);
+  return fetchWrapper("POST", `${API_URL_GET}/auth/login`, Data);
 };
 
 export const signUp = (Data) => {
   console.log(Data)
-  return fetchWrapper("POST", `${API_URL_GET}/auth/buyer/`, Data);
+  return fetchWrapper("POST", `${API_URL_GET}/auth/register`, Data);
 };
 
 

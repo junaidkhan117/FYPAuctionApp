@@ -8,10 +8,39 @@ import { ReactComponent as TagIcon } from "../assets/images/icons/price-area-tag
 import { ReactComponent as DetailsIcon } from "../assets/images/icons/featrures.svg";
 import UploadIcon from '../assets/images/icons/upload.png'
 
+
+
+import { getFromLocalStorage } from "../utils/localStorage";
+import { deleteFromLocalStorage } from "../utils/localStorage";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../Authentication/Login/loginSlice";
+import { userLoggedOut } from "../store/userSlice";
+import { useNavigate } from 'react-router-dom';
+
+
 const ProductDetails = () => {
     const parentScrollContainerRef = useRef();
     const [activeSection, setActiveSection] = useState("section-1"); // State to track active section
     const [imgsAlertMsg, setimgsAlertMsg] = useState('')
+
+
+
+  const userType = getFromLocalStorage("userType");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+      useEffect(() => {
+        if (userType == 'buyer') {
+            dispatch(logout());
+            dispatch(userLoggedOut());
+            deleteFromLocalStorage("authToken");
+            deleteFromLocalStorage("email");
+            deleteFromLocalStorage("user");
+            deleteFromLocalStorage("userId");
+            deleteFromLocalStorage("userType");
+            navigate("/login");
+        }
+      }, []);
+
     //   useEffect(() => {
     //     if (parentScrollContainerRef.current) {
     //       parentScrollContainerRef.current.style.overflowY = "scroll";
@@ -133,7 +162,7 @@ const ProductDetails = () => {
                                     <h5>Product Description</h5>
                                     <div className="row">
                                         <div className="">
-                                            <label  className="form-label mb-3 small">Product Categories</label>
+                                            <label className="form-label mb-3 small">Product Categories</label>
                                             <select className="form-select form-control mb-3" name="" id="validationServer05" aria-describedby="validationServer05Feedback">
                                                 <option selected="">Please Select</option>
                                                 <option value="">New Delhi</option>
@@ -142,18 +171,18 @@ const ProductDetails = () => {
                                             </select>
                                         </div>
                                         <div className="">
-                                            <label  className="form-label mb-3 small">Product Title</label>
+                                            <label className="form-label mb-3 small">Product Title</label>
                                             <input type="text" className="form-control mb-3" placeholder="Please Enter" />
                                         </div>
                                         <div className="" bis_skin_checked="1">
-                                            <label  className="form-label mb-3 small">Description</label>
+                                            <label className="form-label mb-3 small">Description</label>
                                             <div className="form-floating mb-3" bis_skin_checked="1">
                                                 <textarea className="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style={{ height: "100px" }}></textarea>
                                                 <label htmlFor="floatingTextarea2">Please Enter</label>
                                             </div>
                                         </div>
                                         <div className="">
-                                            <label  className="form-label mb-3 small">Product Condition</label>
+                                            <label className="form-label mb-3 small">Product Condition</label>
                                             <select className="form-select form-control mb-3" name="" id="validationServer05" aria-describedby="validationServer05Feedback">
                                                 <option selected="">Please Select</option>
                                                 <option value="">New Delhi</option>
@@ -199,15 +228,15 @@ const ProductDetails = () => {
                                     <h5 className="my-3">Biding Details</h5>
                                     <div className="row align-items-end ">
                                         <div className="">
-                                            <label  className="form-label mb-3 small">Starting Bid Price</label>
+                                            <label className="form-label mb-3 small">Starting Bid Price</label>
                                             <input type="text" className="form-control mb-3" placeholder="Please Enter" />
                                         </div>
                                         <div className="">
-                                            <label  className="form-label mb-3 small">Reserve Price (Optional)</label>
+                                            <label className="form-label mb-3 small">Reserve Price (Optional)</label>
                                             <input type="text" className="form-control mb-3" placeholder="Please Enter" />
                                         </div>
                                         <div className="">
-                                            <label  className="form-label mb-3 small">Auction Duration</label>
+                                            <label className="form-label mb-3 small">Auction Duration</label>
                                             <select className="form-select form-control mb-3" name="" id="validationServer05" aria-describedby="validationServer05Feedback">
                                                 <option selected="">Please Select</option>
                                                 <option value="">New Delhi</option>
@@ -221,8 +250,12 @@ const ProductDetails = () => {
                         </div>
                     </div>
                 </div>
+                <div className="d-flex justify-content-end mt-3">
+                    <button className="nav-link btn btn-gradiant text-white p-2">
+                        Add Post
+                    </button>
+                </div>
             </div>
-
             <Footer />
         </>
     );

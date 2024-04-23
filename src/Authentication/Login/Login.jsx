@@ -4,7 +4,7 @@ import signupBid from "../../assets/images/imgs/signup-bid-img.png";
 import { useLogin } from "../../hooks/common";
 import { Link, useNavigate } from "react-router-dom";
 const Login = () => {
-  const [userName, setUserName] = useState("faisal@gmail.com");
+  const [userName, setUserName] = useState("jk1@gmail.com");
   const [password, setPassword] = useState("123456");
   const [userNameError, setUserNameError] = useState("");
   const [passwordError, setPasswordError] = useState("");

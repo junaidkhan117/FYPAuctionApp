@@ -1,10 +1,25 @@
 import React from 'react'
 import logoLight from "../assets/images/logo/Logo-light.png";
-import { Link, useLocation } from 'react-router-dom';
-
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { getFromLocalStorage } from "../utils/localStorage";
+import { deleteFromLocalStorage } from "../utils/localStorage";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../Authentication/Login/loginSlice";
+import { userLoggedOut } from "../store/userSlice";
 const SellerNav = () => {
   const { pathname } = useLocation();
-
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    dispatch(logout());
+    dispatch(userLoggedOut());
+    deleteFromLocalStorage("authToken");
+    deleteFromLocalStorage("email");
+    deleteFromLocalStorage("user");
+    deleteFromLocalStorage("userId");
+    deleteFromLocalStorage("userType");
+    navigate("/login");
+  };
   return (
     <>
         <nav className="navbar navbar-expand-md scrolled dark-navbar fixed-top">
@@ -32,13 +47,13 @@ const SellerNav = () => {
                     </li>
 
                     <li className="nav-item pe-4">
-                        <a className="nav-link nav-border" href={{}}>Contact
+                        <a className="nav-link nav-border" >Contact
                             <span className="bottom-border"></span>
                         </a>
                     </li>
                     <li className="nav-item pe-0 pe-md-4">
-                        <a className="nav-link btn btn-gradiant text-white" href={{}}> <span
-                                className="fw-semibold">Log</span>out</a>
+                        <button className="nav-link btn btn-gradiant text-white" onClick={handleLogout}> <span
+                                className="fw-semibold">Log</span>out</button>
                     </li>
                 </ul>
             </div>
