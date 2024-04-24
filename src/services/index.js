@@ -22,7 +22,7 @@ export const getDashboardProducts = (page) => {
 
 export const createAuction = (Data) => {
   console.log(Data);
-  return fetchWrapper("POST", `https://ua80926.pythonanywhere.com/v1/api/auction/create`, Data);
+  return fetchWrapper("POST", `${API_URL_GET}/auction/create`, Data);
 };
 
 /**

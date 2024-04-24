@@ -33,6 +33,7 @@ const Product = () => {
       const url = `https://ua80926.pythonanywhere.com/v1/api/bids/by_auction/${auctionId}/?p=${currentPage}&page_size=${pageSize}`;
       const bidResponse = await axios.get(url);
       const { results, count } = bidResponse.data;
+
       setBidData(results);
       setTotalPages(Math.ceil(count / pageSize));
     } catch (error) {
@@ -44,6 +45,7 @@ const Product = () => {
     try {
       const url = `https://ua80926.pythonanywhere.com/v1/api/auction/${auctionId}`;
       const auctionResponse = await axios.get(url);
+      
       setAuctionData(auctionResponse.data.results[0]);
     } catch (error) {
       console.error("Error fetching auction data:", error);
@@ -51,7 +53,7 @@ const Product = () => {
   };
 
   const postBidsData = async () => {
-    const userId = getFromLocalStorage("userId");
+   
     const condition = bidAmount < auctionData.latest_bid;
     if (!condition) {
       const postData = {

@@ -106,7 +106,9 @@ const Home = () => {
                       </div>
                       <div className="col-md-8">
                         <div className="card-body">
-                          <h6 className="card-title mb-0">{item.product_name}</h6>
+                          <h6 className="card-title mb-0">
+                            {item.product_name}
+                          </h6>
                           <div className="card-text my-3">
                             <div className="d-flex align-items-center justify-content-between p-3 timer rounded-2">
                               <CountdownTimer
@@ -117,11 +119,14 @@ const Home = () => {
                           </div>
                           <div className="d-flex align-items-center justify-content-between mb-3">
                             <p className="mb-0 small">Current Bid</p>
-                            <h6 className="mb-0">{item.latest_bid ? item.latest_bid : "000.00"}</h6>
+                            <h6 className="mb-0">
+                              {item.latest_bid ? item.latest_bid : "000.00"}
+                            </h6>
                           </div>
-                          <Link to={`/categoryListing/${item.id}`}>
-                            <button disabled className="btn btn-primary w-100">Bid Now</button>
-                          </Link>
+
+                          <button disabled className="btn btn-primary w-100">
+                            Bid Now
+                          </button>
                         </div>
                       </div>
                     </div>
@@ -132,7 +137,11 @@ const Home = () => {
           </div>
           {/* Pagination */}
           {AuctionsCards?.count > 1 && (
-            <CardsPagination count={Math.ceil(AuctionsCards?.count / 4)} page={page} onClick={handlePageChange} />
+            <CardsPagination
+              count={Math.ceil(AuctionsCards?.count / 4)}
+              page={page}
+              onClick={handlePageChange}
+            />
           )}
         </div>
       </div>

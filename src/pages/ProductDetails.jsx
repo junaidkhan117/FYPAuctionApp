@@ -48,7 +48,7 @@ const ProductDetails = () => {
   }, []);
   let userId;
   if (userType === "seller") {
-     userId = getFromLocalStorage("userId");
+    const userId = getFromLocalStorage("userId");
   }
 
 

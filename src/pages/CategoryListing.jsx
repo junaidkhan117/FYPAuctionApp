@@ -22,7 +22,7 @@ const CategoryListing = () => {
       const response = await axios.get(
         `https://ua80926.pythonanywhere.com/v1/api/auction/by_category/${category}?p=1&page_size=5`
       );
-      console.log(response.data.results);
+      console.log("count", response.data.results.length);
       // console.log("item id", response.data.results.id);
       setAuction(response.data.results);
       console.log(response.data.results.product_images);
@@ -41,7 +41,7 @@ const CategoryListing = () => {
       <div className="category-Page-heading text-center">
         <div className="d-flex justify-content-center">
           <div className="col-12 col-md-7">
-            <h1 className="text-white">CATEGORY 1 LISTING</h1>
+            <h1 className="text-white">CATEGORY  LISTING</h1>
             <p className="text-white">
               ELEVATE YOUR EXPERIENCE IN THE DIGITAL REALM.
             </p>
@@ -63,7 +63,7 @@ const CategoryListing = () => {
             </div>
           </div>
           <div className="col-9">
-            <p className="text-end mb-0">Showing all 8 results</p>
+            <p className="text-end mb-0">Showing all {auction.length} results</p>
           </div>
         </div>
         <div className="row g-4 mt-2">
@@ -98,7 +98,28 @@ const CategoryListing = () => {
                           Electronics
                         </label>
                       </div>
-                      <p className="mb-0 text-gray">(10)</p>
+                     
+                    </div>
+                  </li>
+                  <li className="mb-2">
+                    <div className="d-flex align-items-center justify-content-between">
+                      <div className="form-check">
+                        <input
+                          className="form-check-input"
+                          type="radio"
+                          name="flexRadioDefault"
+                          id="flexRadioDefault1"
+                          value="2" // Set value to identify the category
+                          onChange={handleCategoryChange} // Call handleCategoryChange when the radio input changes
+                        />
+                        <label
+                          className="form-check-label"
+                          htmlFor="flexRadioDefault1"
+                        >
+                          Cars
+                        </label>
+                      </div>
+                     
                     </div>
                   </li>
                 </ul>
