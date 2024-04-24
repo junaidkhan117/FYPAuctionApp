@@ -120,7 +120,7 @@ const Home = () => {
                             <h6 className="mb-0">{item.latest_bid ? item.latest_bid : "000.00"}</h6>
                           </div>
                           <Link to={`/categoryListing/${item.id}`}>
-                            <button className="btn btn-primary w-100">Bid Now</button>
+                            <button disabled className="btn btn-primary w-100">Bid Now</button>
                           </Link>
                         </div>
                       </div>
