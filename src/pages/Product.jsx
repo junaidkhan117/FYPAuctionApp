@@ -80,6 +80,7 @@ const Product = () => {
 
   const handleSelect = (selectedIndex, e) => {
     setIndex(selectedIndex);
+    
   };
 
   return (

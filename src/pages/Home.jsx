@@ -1,27 +1,47 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import axios from "axios";
 import Footer from "../components/Footer";
 import CardsPagination from "../components/CardsPagination";
-import { ReactComponent as CarSvg } from "../assets/images/new-icons/car-category.svg";
-import { ReactComponent as WatchSvg } from "../assets/images/new-icons/watch-category.svg";
-import { ReactComponent as DigiAssessoriesSvg } from "../assets/images/new-icons/DigitalAssessories-category.svg";
-import carImg from "../assets/images/car.png";
+import CountdownTimer from "../components/CountdownTimer";
 import Carousel from "react-bootstrap/Carousel";
-import { usegetAuctions } from "../hooks/common";
-import { getFromLocalStorage } from "../utils/localStorage";
-import CountdownTimer from './../components/CountdownTimer';
+
 const Home = () => {
   const [page, setPage] = useState(1);
-  const { data: AuctionsCards } = usegetAuctions(page);
-  console.log(AuctionsCards);
-  // const authToken = getFromLocalStorage("authToken");
-  const [index, setIndex] = useState(0);
+  const [AuctionsCards, setAuctionsCards] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [sortBy, setSortBy] = useState("");
 
-  const PageChange = (number) => {
-    setPage(number);
+  const getAuctions = async () => {
+    let auctionUrl = `https://ua80926.pythonanywhere.com/v1/api/auction/?page=${page}&page_size=4`;
 
-    // Implementation of callApi
+    if (searchTerm) {
+      auctionUrl += `&search=${searchTerm}`;
+    }
+    if (sortBy) {
+      auctionUrl += `&sort_by=${sortBy}`;
+    }
+
+    try {
+      const response = await axios.get(auctionUrl);
+      setAuctionsCards(response.data.results);
+    } catch (error) {
+      console.error("Error fetching auctions:", error);
+    }
   };
-  
+
+  const handlePageChange = (newPage) => {
+    setPage(newPage);
+  };
+
+  const handleSearch = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
+  useEffect(() => {
+    getAuctions();
+  }, [page, searchTerm, sortBy]);
+
   return (
     <>
       <div className="Page-heading text-center">
@@ -41,41 +61,20 @@ const Home = () => {
         <div className="container Search-Area">
           <div className="row g-3 searcbar-home rounded-3 p-3 pt-0 bg-white">
             <div className="col">
-              <a
-                href="./property-adds.html"
-                className="w-100 py-2 btn btn-city"
-              >
-                <CarSvg className=" mb-1 me-1" width="33" height="33" />
-                Cars
-              </a>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Search..."
+                value={searchTerm}
+                onChange={handleSearch}
+              />
             </div>
-            <div className="col">
-              <a
-                href="./property-adds.html"
-                className="w-100 py-2 btn btn-city"
-              >
-                <WatchSvg className=" mb-1 me-1" width="30" height="30" />
-                Watches
-              </a>
-            </div>
-            <div className="col">
-              <a
-                href="./property-adds.html"
-                className="w-100 py-2 btn btn-city"
-              >
-                <DigiAssessoriesSvg
-                  className=" mb-1 me-1"
-                  width="30"
-                  height="30"
-                />
-                Digital Assessories
-              </a>
-            </div>
+            {/* Other category buttons */}
           </div>
         </div>
         <div className="text-center py-5">
           <h1 className="text-primary text-dark">
-            LIVE <span className="text-primary h1">BIDDING</span> SHOWCACE
+            LIVE <span className="text-primary h1">BIDDING</span> SHOWCASE
           </h1>
           <p className="text-dark mb-0">
             Discover the finest items on the world's largest bidding platform.
@@ -84,61 +83,57 @@ const Home = () => {
           </p>
         </div>
         <div className="container pt-4">
-          <div className="row g-4">
-            {AuctionsCards?.results?.map((auctions) => (
-              <div className="col-lg-6">
-                <div
-                  className="card mb-3 border-0 overflow-hidden rounded-start-4"
-                  style={{ maxWidth: "695px" }}
-                >
-                  <div className="row g-0  ">
-                    <div className="col-md-4 ">
-                      {/* <Carousel>
-                        {auctions?.product_images.map((imgs, index)=>(
-                        <Carousel.Item className="">
-                          <img
-                            src={imgs.index}
-                            className="d-block object-fit-contain"
-                            alt="..."
-                          />
-                        </Carousel.Item>
-                       ))}
-                      </Carousel> */}
-                    </div>
-                    <div className="col-md-8">
-                      <div className="card-body">
-                        <h6 className="card-title mb-0">
-                          {auctions.product_name}
-                        </h6>
-                        <div className="card-text my-3">
-               
-                          <CountdownTimer endTime={auctions.end_time} />
-                          
+          <div className="col-10">
+            <div className="row g-4">
+              {AuctionsCards?.map((item, key) => (
+                <div className="col-lg-6" key={key}>
+                  <div className="card mb-3 border-0 overflow-hidden rounded-start-4">
+                    <div className="row g-0">
+                      <div className="col-md-4">
+                        <Carousel>
+                          {item.product_images &&
+                            item.product_images.map((uploaded_image, index) => (
+                              <Carousel.Item key={index}>
+                                <img
+                                  src={uploaded_image.image}
+                                  className="d-block object-fit-contain"
+                                  style={{ width: "370px" }}
+                                  alt="..."
+                                />
+                              </Carousel.Item>
+                            ))}
+                        </Carousel>
+                      </div>
+                      <div className="col-md-8">
+                        <div className="card-body">
+                          <h6 className="card-title mb-0">{item.product_name}</h6>
+                          <div className="card-text my-3">
+                            <div className="d-flex align-items-center justify-content-between p-3 timer rounded-2">
+                              <CountdownTimer
+                                startTime={new Date(item.auction_start_time0)}
+                                endTime={new Date(item.auction_end_time)}
+                              />
+                            </div>
+                          </div>
+                          <div className="d-flex align-items-center justify-content-between mb-3">
+                            <p className="mb-0 small">Current Bid</p>
+                            <h6 className="mb-0">{item.latest_bid ? item.latest_bid : "000.00"}</h6>
+                          </div>
+                          <Link to={`/categoryListing/${item.id}`}>
+                            <button className="btn btn-primary w-100">Bid Now</button>
+                          </Link>
                         </div>
-                        <div className="d-flex align-items-center justify-content-between mb-3">
-                          <p className="mb-0 small">Current Bid</p>
-                          <h6 className="mb-0">
-                            {auctions.latest_bid || auctions.product_initialPrice}
-                          </h6>
-                        </div>
-                        <button className="btn btn-primary w-100">
-                          Bid Now
-                        </button>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            ))}
-            {AuctionsCards?.count > 1 && (
-              <CardsPagination
-                count={Math.ceil(AuctionsCards?.count / 4)}
-                // count={Math.ceil(6 / 4)}
-                page={page}
-                onClick={PageChange}
-              />
-            )}
+              ))}
+            </div>
           </div>
+          {/* Pagination */}
+          {AuctionsCards?.count > 1 && (
+            <CardsPagination count={Math.ceil(AuctionsCards?.count / 4)} page={page} onClick={handlePageChange} />
+          )}
         </div>
       </div>
       <Footer />
