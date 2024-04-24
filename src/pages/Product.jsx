@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Tab, Tabs } from "react-bootstrap";
+import { Alert, Tab, Tabs } from "react-bootstrap";
 import Carousel from "react-bootstrap/Carousel";
 import Footer from "../components/Footer";
 import CardsPagination from "../components/CardsPagination";
@@ -8,65 +8,78 @@ import { useParams } from "react-router-dom";
 import { getFromLocalStorage } from "../utils/localStorage";
 import CountdownTimer from "../components/CountdownTimer";
 const Product = () => {
-  const [key, setKey] = useState("home");
+  const [key, setKey] = useState("description");
+  const [tabkey, setTabKey] = useState("description"); 
   const { id: auctionId } = useParams();
   const [auctionData, setAuctionData] = useState([]);
   const [bidAmount, setBidAmount] = useState();
   const [bidData, setBidData] = useState([]);
   const [success, setSuccess] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [pageSize, setPageSize] = useState(5);
+  const [index, setIndex] = useState(0);
 
   useEffect(() => {
-    getAuctionbyId();
-    getBidsByAuctionId();
+    getAuctionById();
   }, [auctionId]);
 
+  useEffect(() => {
+    getBidsByAuctionId();
+  }, [auctionId, currentPage, pageSize]);
+
   const getBidsByAuctionId = async () => {
-    const url = `https://ua80926.pythonanywhere.com/v1/api/bids/by_auction/${auctionId}/?p=1&page_size=5`;
     try {
+      const url = `https://ua80926.pythonanywhere.com/v1/api/bids/by_auction/${auctionId}/?p=${currentPage}&page_size=${pageSize}`;
       const bidResponse = await axios.get(url);
-      console.log("Bid Data:", bidResponse.data.results);
-      setBidData(bidResponse.data.results);
+      const { results, count } = bidResponse.data;
+      setBidData(results);
+      setTotalPages(Math.ceil(count / pageSize));
     } catch (error) {
       console.error("Error fetching bid data:", error);
     }
   };
 
-  const getAuctionbyId = async () => {
-    const url = `https://ua80926.pythonanywhere.com/v1/api/auction/${auctionId}`;
+  const getAuctionById = async () => {
     try {
+      const url = `https://ua80926.pythonanywhere.com/v1/api/auction/${auctionId}`;
       const auctionResponse = await axios.get(url);
-      console.log("Auction Data:", auctionResponse.data.results);
       setAuctionData(auctionResponse.data.results[0]);
     } catch (error) {
       console.error("Error fetching auction data:", error);
     }
   };
-  let userId;
-  useEffect(() => {
-    const userType = localStorage.getItem("userType");
-
-    userId = getFromLocalStorage("userId");
-  }, [bidAmount]);
 
   const postBidsData = async () => {
-    console.log("user id", userId);
-    const postData = {
-      auction: auctionId,
-      bidder: 2,
-      price: bidAmount,
-    };
+    const userId = getFromLocalStorage("userId");
+    const condition = bidAmount < auctionData.latest_bid;
+    if (!condition) {
+      const postData = {
+        auction: auctionId,
+        bidder: userId,
+        price: bidAmount,
+      };
 
-    try {
-      const response = await axios.post(
-        "https://ua80926.pythonanywhere.com/v1/api/bids/",
-        postData
-      );
-      console.log("Response:", response.data);
-      setSuccess(true);
-    } catch (error) {
-      console.error("Error:", error);
-      setSuccess(false);
+      try {
+        const response = await axios.post(
+          "https://ua80926.pythonanywhere.com/v1/api/bids/",
+          postData
+        );
+        console.log("Response:", response.data);
+        setSuccess(true);
+        alert("Bid Placed Successfully");
+      } catch (error) {
+        console.error("Error:", error);
+        setSuccess(false);
+      }
+    } else {
+      alert("Bid amount should be greater than the current bid amount");
+      return;
     }
+  };
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
   };
 
   const setLoader = (errMsg) => {
@@ -76,11 +89,8 @@ const Product = () => {
     return null;
   };
 
-  const [index, setIndex] = useState(0);
-
   const handleSelect = (selectedIndex, e) => {
     setIndex(selectedIndex);
-    
   };
 
   return (
@@ -94,7 +104,7 @@ const Product = () => {
       </div>
       <div className="bg-gradient container-fluid p-5">
         <div className="row g-4 mt-2">
-          <div className="col-4">
+          <div className="col-5">
             <div className="">
               <h4 className=" mb-5">{auctionData.product_name}</h4>
               <p className="text-dark">
@@ -158,7 +168,7 @@ const Product = () => {
               </div>
             </div>
           </div>
-          <div className="col-8">
+          <div className="col-7">
             <div className="container position-relative rounded-1">
               <div
                 className="suite-img-slider bg-transparent"
@@ -192,6 +202,7 @@ const Product = () => {
           <Tabs
             id="controlled-tab-example"
             activeKey={key}
+            
             onSelect={(k) => setKey(k)}
             className="tab-border-bottom pt-3 gap-3 mb-3 border-tabs"
           >
@@ -230,17 +241,49 @@ const Product = () => {
                 </thead>
                 <tbody className="small">
                   {bidData &&
-                    bidData.map((bid, index) => (
-                      <tr key={index}>
-                        <th scope="row" className="ps-4 pe-2">
-                          {index + 1}
-                        </th>
-                        <td>{bid.price}</td>
-                        <td>{bid.created_at}</td>
-                      </tr>
-                    ))}
+                    bidData
+                      .map((bid, index) => (
+                        <tr key={index}>
+                          <th scope="row" className="ps-4 pe-2">
+                            {bid.id}
+                          </th>
+                          <td>{bid.price}</td>
+                          <td>{bid.created_at}</td>
+                        </tr>
+                      ))}
                 </tbody>
               </table>
+              {/* pagination */}
+
+              <div className="employee-displaying d-flex flex-wrap-reverse align-items-center justify-content-between p-3 border-top">
+                <div className="d-flex flex-wrap-reverse align-items-center mt-md-0 mt-3">
+                  <p className="mb-0 mt-sm-0 mt-1 displaying-records">
+                    Displaying {bidData.length} for {totalPages} records
+                  </p>
+                  <div className="d-flex justify-content-between align-items-center ms-sm-0 ms-2">
+                    <select
+                      className="ms-sm-4 form-select input-flied gray border-0"
+                      onChange={(e) => handlePageChange(e.target.value)}
+                      value={currentPage}
+                    >
+                      {Array.from({ length: totalPages }, (_, i) => (
+                        <option key={i + 1} value={i + 1}>
+                          {i + 1}
+                        </option>
+                      ))}
+                    </select>
+                    <div className="d-flex align-items-center">
+                      <div className="ms-sm-3 ms-2">
+                        <div className="loader"></div>
+                      </div>
+                      <div className="displaying-records ms-2">
+                        <label htmlFor="loader">loading...</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <CardsPagination />
+              </div>
             </Tab>
           </Tabs>
         </div>
