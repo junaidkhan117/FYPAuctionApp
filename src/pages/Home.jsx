@@ -21,27 +21,7 @@ const Home = () => {
 
     // Implementation of callApi
   };
-  // const images = [
-  //   {
-  //     carImg,
-  //   },
-  //   {
-  //     carImg,
-  //   },
-  //   {
-  //     carImg,
-  //   },
-  // ];
-  // const handleSelect = (selectedIndex, e) => {
-  //   setIndex(selectedIndex);
-  // };
-  // <>
-  //   <Carousel activeIndex={index} onSelect={handleSelect}>
-  //     {images.map((image, idx) => (
-  //       <Carousel.Item key={idx}></Carousel.Item>
-  //     ))}
-  //   </Carousel>
-  // </>;
+  
   return (
     <>
       <div className="Page-heading text-center">

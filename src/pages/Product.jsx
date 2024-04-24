@@ -6,7 +6,7 @@ import CardsPagination from "../components/CardsPagination";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { getFromLocalStorage } from "../utils/localStorage";
-
+import CountdownTimer from "../components/CountdownTimer";
 const Product = () => {
   const [key, setKey] = useState("home");
   const { id: auctionId } = useParams();
@@ -108,34 +108,24 @@ const Product = () => {
               <p>
                 ITEM CONDITION:{" "}
                 <span className="text-primary">
-                  {auctionData.product_condition}
+                  {auctionData.product_condition
+                    ? auctionData.product_condition
+                    : "Not Available"}
                 </span>
               </p>
               <p>
                 Expected Price:{" "}
                 <span className="text-primary">
-                  {auctionData.expected_value}
+                  {auctionData.expected_value ? auctionData.expected_value : 0}
                 </span>
               </p>
               <div className=" my-3">
                 <p>TIME LEFT</p>
                 <div className="d-flex align-items-center justify-content-between p-3 timer rounded-2 bg-light">
-                  <div className="text-center days">
-                    <h4 className="mb-1 text-primary">96</h4>
-                    <p className="small mb-0">Days</p>
-                  </div>
-                  <div className="text-center hours">
-                    <h4 className="mb-1 text-primary">14</h4>
-                    <p className="small mb-0">Hours</p>
-                  </div>
-                  <div className="text-center minutes">
-                    <h4 className="mb-1 text-primary">44</h4>
-                    <p className="small mb-0">Minutes</p>
-                  </div>
-                  <div className="text-center seconds">
-                    <h4 className="mb-1 text-primary">12</h4>
-                    <p className="small mb-0">Seconds</p>
-                  </div>
+                  <CountdownTimer
+                    startTime={new Date(auctionData.auction_start_time0)}
+                    endTime={new Date(auctionData.auction_end_time)}
+                  />
                 </div>
                 <p className="my-3">
                   AUCTION ENDS:{" "}

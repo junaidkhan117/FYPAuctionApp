@@ -6,6 +6,7 @@ import Carousel from "react-bootstrap/Carousel";
 import axios from "axios";
 import { upload } from "@testing-library/user-event/dist/upload";
 import { Link } from "react-router-dom";
+import CountdownTimer from "../components/CountdownTimer";
 
 const CategoryListing = () => {
   const [category, setCategory] = useState("");
@@ -136,22 +137,10 @@ const CategoryListing = () => {
                           </h6>
                           <div className="card-text my-3">
                             <div className="d-flex align-items-center justify-content-between p-3 timer rounded-2">
-                              <div className="text-center days">
-                                <h4 className="mb-1">96</h4>
-                                <p className="small mb-0">Days</p>
-                              </div>
-                              <div className="text-center hours">
-                                <h4 className="mb-1">14</h4>
-                                <p className="small mb-0">Hours</p>
-                              </div>
-                              <div className="text-center minutes">
-                                <h4 className="mb-1">44</h4>
-                                <p className="small mb-0">Minutes</p>
-                              </div>
-                              <div className="text-center seconds">
-                                <h4 className="mb-1">12</h4>
-                                <p className="small mb-0">Seconds</p>
-                              </div>
+                              <CountdownTimer
+                                startTime={new Date(item.auction_start_time0)}
+                                endTime={new Date(item.auction_end_time)}
+                              />
                             </div>
                           </div>
                           <div className="d-flex align-items-center justify-content-between mb-3">
