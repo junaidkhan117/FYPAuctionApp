@@ -99,12 +99,12 @@ const NavBar = () => {
                     </Link>
                   </li>
 
-                  <li className="nav-item pe-4">
+                  {/* <li className="nav-item pe-4">
                     <Link to={"/products"} className={`nav-link nav-border ${pathname === "/products" && 'active'}`}>
                       Products
                       <span className="bottom-border"></span>
                     </Link>
-                  </li>
+                  </li> */}
 
                 </>
               }
