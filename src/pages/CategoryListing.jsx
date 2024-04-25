@@ -143,8 +143,8 @@ const CategoryListing = () => {
                               <Carousel.Item key={index}>
                                 <img
                                   src={uploaded_image.image}
-                                  className="d-block object-fit-contain"
-                                  style={{ width: "370px" }}
+                                  className="d-block"
+                                  style={{ width: "370px", height: "247px", objectFit:"cover" }}
                                   alt="..."
                                 />
                               </Carousel.Item>

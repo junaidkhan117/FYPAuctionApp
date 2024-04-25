@@ -3,12 +3,18 @@ import LogoWhite from "../../assets/images/logo/Logo-white.png";
 import signupBid from "../../assets/images/imgs/signup-bid-img.png";
 import { useLogin } from "../../hooks/common";
 import { Link, useNavigate } from "react-router-dom";
+import { Button } from "react-bootstrap";
+import Modal from 'react-bootstrap/Modal';
 const Login = () => {
-  const [userName, setUserName] = useState("jk1@gmail.com");
-  const [password, setPassword] = useState("123456");
+  const [userName, setUserName] = useState("");
+  const [password, setPassword] = useState("");
   const [userNameError, setUserNameError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [loginResponse, setLoginResponse] = useState(null);
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   const navigate = useNavigate();
   const onError = (error) => {
     setPasswordError("Invalid Password");
@@ -17,7 +23,7 @@ const Login = () => {
   const handleSuccess = (data) => {
     console.log(data)
     navigate("/");
-    
+
   };
 
   const { mutate: loginApi, data } = useLogin(onError, handleSuccess);
@@ -58,7 +64,7 @@ const Login = () => {
               <p className="small">
                 Don't have an account? {" "}
                 <Link to="/signup" >
-                <span className="text-danger">Join here</span>
+                  <span className="text-danger">Join here</span>
                 </Link>
               </p>
             </div>
@@ -66,7 +72,7 @@ const Login = () => {
               <div className="p-sm-5 p-3 p-lg-5 pt-sm-5 pt-0 ">
                 <div className="mb-3">
                   <label className="form-label regular small">
-                    Username or email address
+                    Email address
                   </label>
                   <input
                     type="email"
@@ -94,17 +100,9 @@ const Login = () => {
                   />
                 </div>
                 <div className="d-flex justify-content-between">
-                  <div className="form-check">
-                    <input
-                      className="form-check-input"
-                      type="checkbox"
-                      value=""
-                      id=""
-                    />
-                    <label className="form-check-label regular small">
-                      Remember Me
-                    </label>
-                  </div>
+                  <button href="" className="border-0 bg-transparent" onClick={handleShow}>
+                    <span className="text-danger" >Forget Password?</span>
+                  </button>
                 </div>
                 <div className="d-flex justify-content-evenly align-items-center pt-5 mt-3">
                   <button
@@ -120,6 +118,34 @@ const Login = () => {
           </div>
         </div>
       </div>
+      {/* Model */}
+      <Modal show={show} onHide={handleClose} animation={false}>
+        <Modal.Header closeButton className="border-bottom-0">
+        </Modal.Header>
+        <Modal.Body >
+          <label className="form-label regular small">
+            Email address
+          </label>
+          <input
+            type="email"
+            className="form-control "
+            placeholder="Please Enter"
+            value={userName}
+            onFocus={handleFocus}
+            onChange={(e) => {
+              setUserName(e.target.value);
+            }}
+          />
+        </Modal.Body>
+        <Modal.Footer className="border-top-0">
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handleClose}>
+            Submit
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </>
   );
 };

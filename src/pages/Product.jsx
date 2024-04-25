@@ -188,6 +188,7 @@ const Product = () => {
                             width: "100%",
                             borderRadius: "5px 5px 5px 5px",
                             height: "500px",
+                            objectFit: "contain"
                           }}
                         />
                       </Carousel.Item>

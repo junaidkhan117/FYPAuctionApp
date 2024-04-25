@@ -10,6 +10,7 @@ const Home = () => {
   const [page, setPage] = useState(1);
   const [AuctionsCards, setAuctionsCards] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [cardCount, setcardCount] = useState("");
   const [sortBy, setSortBy] = useState("");
 
   const getAuctions = async () => {
@@ -25,6 +26,8 @@ const Home = () => {
     try {
       const response = await axios.get(auctionUrl);
       setAuctionsCards(response.data.results);
+      setcardCount(response.data.count)
+      console.log(response)
     } catch (error) {
       console.error("Error fetching auctions:", error);
     }
@@ -96,8 +99,8 @@ const Home = () => {
                               <Carousel.Item key={index}>
                                 <img
                                   src={uploaded_image.image}
-                                  className="d-block object-fit-contain"
-                                  style={{ width: "370px" }}
+                                  className="d-block"
+                                  style={{ width: "370px", height: "247px" }}
                                   alt="..."
                                 />
                               </Carousel.Item>
@@ -136,9 +139,10 @@ const Home = () => {
             </div>
           </div>
           {/* Pagination */}
-          {AuctionsCards?.count > 1 && (
+          {cardCount > 1 && (
+
             <CardsPagination
-              count={Math.ceil(AuctionsCards?.count / 4)}
+              count={Math.ceil(cardCount / 4)}
               page={page}
               onClick={handlePageChange}
             />

@@ -7,6 +7,7 @@ import { ReactComponent as SearchIcon } from "../assets/images/new-icons/listing
 import { ReactComponent as FilterIcon } from "../assets/images/new-icons/listing-filter-icon.svg";
 import { ReactComponent as EditIcon } from "../assets/images/new-icons/listing-edit-icon.svg";
 import { ReactComponent as MenuIcon } from "../assets/images/new-icons/listing-menu-icon.svg";
+import { ReactComponent as DeleteIcon } from "../assets/images/new-icons/Delete-Icon.svg";
 import CardsPagination from "./CardsPagination";
 import axios from "axios";
 
@@ -177,12 +178,12 @@ const Table = () => {
                         item.isSold ? "info" : "danger"
                       }`}
                     >
-                      {item.isSold ? "True" : "False"}
+                      {item.isSold ? "Sold" : "Unsold"}
                     </span>
                   </td>
                   <td className="d-flex justify-content-evenly">
                     <button className="btn btn-light-primary">
-                      <EditIcon width="14" height="14" />
+                      <DeleteIcon width="14" height="14" />
                     </button>
                     <Dropdown>
                       <Dropdown.Toggle
